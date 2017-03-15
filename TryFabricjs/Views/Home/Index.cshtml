@@ -2,29 +2,29 @@
     ViewBag.Title = "Home Page";
 }
 <style>
-    #c {
-        min-width: 400px;
-        min-height: 400px;
-    }
 </style>
 
-
-<canvas id="c"></canvas>
-
+<div class="col-md-12">
+    <div class="col-md-4"></div>
+    <div class="col-md-8"></div>
+    <canvas id="c"></canvas>
+</div>
 @section scripts{
 
     <script src="~/Scripts/fabric.js"></script>
     <script>
+        // create a wrapper around native canvas element (with id="c")
         var canvas = new fabric.Canvas('c');
 
+        // create a rectangle object
         var rect = new fabric.Rect({
             left: 100,
             top: 100,
             fill: 'red',
             width: 20,
-            height: 20,
+            height: 20
         });
 
-        canvas.add(rect);
-    </script>
+        // "add" rectangle onto canvas
+        canvas.add(rect);    </script>
 }
