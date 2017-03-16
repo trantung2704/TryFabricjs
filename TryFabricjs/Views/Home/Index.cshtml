@@ -4,27 +4,90 @@
 <style>
 </style>
 
-<div class="col-md-12">
-    <div class="col-md-4"></div>
-    <div class="col-md-8"></div>
-    <canvas id="c"></canvas>
+<div class="col-md-12" style="border: 1px solid blue; min-height: 500px;">
+    <div class="col-md-4" style="background-color: #ffe4e1">
+        <div class="col-md-12" style="height: 100%">
+            <button class="btn btn-default" style="color: red" onclick="addRedArrow()">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-default" style="color: gray" onclick="addGrayArrow()">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-12" style="height: 100%">
+            <button class="btn btn-default" style="color: red" onclick="addRedRound()">
+                <i class="fa fa-circle-thin" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-default" style="color: gray" onclick="addGrayRound()">
+                <i class="fa fa-circle-thin" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-default" onclick="deleteObject()">
+                Delete
+            </button>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <canvas id="c" width="900" height="500" style="border: 1px solid green"></canvas>
+    </div>
+</div>
+
+<div class="col-md-12" id="sampleImage">
+    <img src="http://cdn.motosaigon.vn/wp-content/uploads/2016/05/6-2.png"/>
 </div>
 @section scripts{
 
     <script src="~/Scripts/fabric.js"></script>
     <script>
+        var redRoundUrl = "http://localhost:4587/content/images/red-round.png";
+        var redArrowUrl = "http://localhost:4587/content/images/red-arrow.png";
+        var grayRoundUrl = "http://localhost:4587/content/images/gray-round.png";
+        var grayArrowUrl = "http://localhost:4587/content/images/gray-arrow.png";
+
         // create a wrapper around native canvas element (with id="c")
         var canvas = new fabric.Canvas('c');
 
-        // create a rectangle object
-        var rect = new fabric.Rect({
-            left: 100,
-            top: 100,
-            fill: 'red',
-            width: 20,
-            height: 20
-        });
+        var sampleImage = document.getElementById("sampleImage");
+        fabric.Image.fromURL(sampleImage,
+            function(img) {
+                canvas.add(img).setActiveObject(img);
+            });
 
-        // "add" rectangle onto canvas
-        canvas.add(rect);    </script>
+        function addRedRound() {
+            fabric.Image.fromURL(redRoundUrl,
+                function(img) {
+                    canvas.add(img).setActiveObject(img);
+                });
+        }
+
+        function addRedArrow() {
+            fabric.Image.fromURL(redArrowUrl,
+                function(img) {
+                    canvas.add(img).setActiveObject(img);
+                });
+        }
+
+        function addGrayRound() {
+            fabric.Image.fromURL(grayRoundUrl,
+                function(img) {
+                    canvas.add(img).setActiveObject(img);
+                });
+        }
+
+        function addGrayArrow() {
+            fabric.Image.fromURL(grayArrowUrl,
+                function(img) {
+                    canvas.add(img).setActiveObject(img);
+                });
+        }
+
+        function deleteObject() {
+            canvas.getActiveObject().remove();
+        }
+    </script>
 }
